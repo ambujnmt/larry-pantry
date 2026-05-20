@@ -3,6 +3,8 @@ import Header from "./customer/components/Header";
 import Footer from "./customer/components/Footer";
 import Home from "./customer/pages/Home";
 import Contact from "./customer/pages/Contact";
+import About from "./customer/pages/About";
+import Categories from "./customer/pages/Categories";
 /*----- Admin Panel ------*/
 import AdminLogin from "./admin/pages/AdminLogin";
 /*------------------------*/
@@ -15,6 +17,8 @@ function App() {
         {/* Customer Routes - Header Footer ke saath */}
         <Route path="/" element={<><Header /><Home /><Footer /></>} />
         <Route path="/contact" element={<><Header /><Contact /><Footer /></>} />
+        <Route path="/about" element={<><Header /><About /><Footer /></>} />
+        <Route path="/categories" element={<><Header /><Categories /><Footer /></>} />
 
         {/* Admin Routes - Header Footer NAHI */}
         <Route path="/admin" element={<AdminLogin />} />
