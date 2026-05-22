@@ -7,6 +7,11 @@ import About from "./customer/pages/About";
 import Categories from "./customer/pages/Categories";
 /*----- Admin Panel ------*/
 import AdminLogin from "./admin/pages/AdminLogin";
+import AuthLayout from "./admin/layouts/AuthLayout";
+import DashboardLayout from "./admin/layouts/DashboardLayout";
+import Dashboard from "./admin/pages/Dashboard";
+import Orders from "./admin/pages/Orders";
+import Account from "./admin/pages/Account";
 /*------------------------*/
 
 function App() {
@@ -22,6 +27,13 @@ function App() {
 
         {/* Admin Routes - Header Footer NAHI */}
         <Route path="/admin" element={<AdminLogin />} />
+        {/* ADMIN DASHBOARD PAGES */}
+        <Route path="/admin/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>}/>
+
+        <Route path="/admin/orders" element={<DashboardLayout><Orders /></DashboardLayout>}/>
+
+        <Route path="/admin/account" element={<DashboardLayout><Account /></DashboardLayout>}/>
+
 
       </Routes>
     </BrowserRouter>
