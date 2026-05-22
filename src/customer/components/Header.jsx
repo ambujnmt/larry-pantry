@@ -91,10 +91,10 @@ function Header() {
                     <ul>
                       <li className="active"><Link to="/">Home</Link></li>
                       <li><Link to="/about">About Us</Link></li>
-                      <li><Link to="/food-menu">Food Menu</Link></li>
+                      <li><Link to="#">Food Menu</Link></li>
                       <li><Link to="/categories">Categories</Link></li>
-                      <li><Link to="/offers">Special Offers / Deals</Link></li>
-                      <li><Link to="/gallery">Gallery</Link></li>
+                      <li><Link to="#">Special Offers / Deals</Link></li>
+                      <li><Link to="#">Gallery</Link></li>
                       <li><Link to="/contact">Contact Us</Link></li>
                     </ul>
                   </nav>

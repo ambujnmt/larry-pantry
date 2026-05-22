@@ -40,7 +40,7 @@ function Footer() {
                 <h6 className="footer-title">INFORMATION</h6>
                 <ul className="footer-list">
                   <li><a href="#">Contact us</a></li>
-                  <li><a href="#">About us</a></li>
+                  <li><a href="/about">About us</a></li>
                   <li><a href="#">Privacy Policy</a></li>
                   <li><a href="#">Wishlist</a></li>
                   <li><a href="#">Checkout</a></li>
@@ -55,10 +55,10 @@ function Footer() {
                 <ul className="footer-list">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">Food Menu</a></li>
-                  <li><a href="#">Categories</a></li>
+                  <li><a href="/categories">Categories</a></li>
                   <li><a href="#">Special Offers / Deals</a></li>
                   <li><a href="#">Gallery</a></li>
-                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
                 </ul>
               </div>
             </div>
