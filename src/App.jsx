@@ -26,7 +26,8 @@ function App() {
         <Route path="/categories" element={<><Header /><Categories /><Footer /></>} />
 
         {/* Admin Routes - Header Footer NAHI */}
-        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin"       element={<AuthLayout><AdminLogin /></AuthLayout>} />
+        <Route path="/admin/login" element={<AuthLayout><AdminLogin /></AuthLayout>} />
         {/* ADMIN DASHBOARD PAGES */}
         <Route path="/admin/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>}/>
 

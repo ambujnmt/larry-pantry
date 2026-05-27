@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import AdminSidebar from "./AdminSidebar";
 
-const AdminHeader = ({ setSidebarOpen }) => {
+const AdminHeader = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <header className="app-header fixed-top">
       <div className="app-header-inner">
@@ -33,7 +34,7 @@ const AdminHeader = ({ setSidebarOpen }) => {
               </div>
 
               {/* Search */}
-              <div className="app-search-box col">
+              {/*<div className="app-search-box col">
                 <form className="app-search-form">
                   <input
                     type="text"
@@ -47,7 +48,7 @@ const AdminHeader = ({ setSidebarOpen }) => {
                     <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
-              </div>
+              </div>*/}
 
               {/* Right Menu */}
               <div className="app-utilities col-auto">
@@ -115,6 +116,10 @@ const AdminHeader = ({ setSidebarOpen }) => {
           </div>
         </div>
       </div>
+      <AdminSidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
     </header>
   );
 };
