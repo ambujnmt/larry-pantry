@@ -21,7 +21,7 @@ function App() {
 
         {/* Customer Routes - Header Footer ke saath */}
         <Route path="/" element={<><Header /><Home /><Footer /></>} />
-        <Route path="contact" element={<><Header /><Contact /><Footer /></>} />
+        <Route path="/contact" element={<><Header /><Contact /><Footer /></>} />
         <Route path="/about" element={<><Header /><About /><Footer /></>} />
         <Route path="/categories" element={<><Header /><Categories /><Footer /></>} />
 
