@@ -7,16 +7,32 @@ function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
-    // Frontend CSS off, Admin CSS + FA on
-    document.querySelectorAll('link[rel="stylesheet"]:not(#admin-portal-css):not(#admin-fa-css)').forEach(l => l.disabled = true)
-    document.getElementById('admin-portal-css').disabled = false
-    document.getElementById('admin-fa-css').disabled = false
+    const frontendLinks = document.querySelectorAll('link[rel="stylesheet"]')
+    frontendLinks.forEach(link => {
+      link.setAttribute('data-disabled', 'true')
+      link.disabled = true
+    })
+
+    const adminCSS = document.createElement('link')
+    adminCSS.rel = 'stylesheet'
+    adminCSS.href = '/admin-assets/css/portal.css'
+    adminCSS.id = 'admin-portal-css'
+    document.head.appendChild(adminCSS)
+
+    const adminFA = document.createElement('script')
+    adminFA.src = '/admin-assets/plugins/fontawesome/js/all.min.js'
+    adminFA.id = 'admin-fontawesome-js'
+    document.head.appendChild(adminFA)
 
     return () => {
-      // Wapas frontend par — admin CSS + FA off
-      document.querySelectorAll('link[rel="stylesheet"]').forEach(l => l.disabled = false)
-      document.getElementById('admin-portal-css').disabled = true
-      document.getElementById('admin-fa-css').disabled = true
+      document.getElementById('admin-portal-css')?.remove()
+      document.getElementById('admin-fontawesome-js')?.remove()
+
+      const disabledLinks = document.querySelectorAll('link[data-disabled="true"]')
+      disabledLinks.forEach(link => {
+        link.disabled = false
+        link.removeAttribute('data-disabled')
+      })
     }
   }, [])
 

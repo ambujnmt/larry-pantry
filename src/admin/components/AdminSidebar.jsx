@@ -8,6 +8,15 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const isActive = (path) =>
     location.pathname === path ? "active" : "";
 
+  const isSubmenuActive = (paths) =>
+  paths.some((p) => location.pathname.startsWith(p));
+
+  const pagesActive = isSubmenuActive([
+    "/admin/notifications",
+    "/admin/account",
+    "/admin/settings",
+  ]);
+
   return (
     <div id="app-sidepanel" className={`app-sidepanel ${sidebarOpen ? "sidepanel-visible" : ""}`}>
 
@@ -24,12 +33,8 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
         {/* Logo */}
         <div className="app-branding">
           <Link className="app-logo" to="/admin/dashboard">
-            <img
-              className="logo-icon me-2"
-              src="/admin-assets/images/app-logo.svg"
-              alt="logo"
-            />
-            <span className="logo-text">LARRY PANTRY</span>
+            <img className="logo-icon me-2" src="/admin-assets/images/logo.png" alt="logo"/>
+            {/*<span className="logo-text">LARRY PANTRY</span>*/}
           </Link>
         </div>
 
@@ -67,14 +72,14 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </Link>
             </li>
 
-            <li className="nav-item">
+            {/*<li className="nav-item">
               <Link className={`nav-link ${isActive("/admin/account")}`} to="/admin/account">
                 <span className="nav-link-text">Account</span>
               </Link>
-            </li>
+            </li>*/}
 
             {/* COLLAPSIBLE MENU FIXED */}
-            <li className="nav-item has-submenu">
+            <li className={`nav-item has-submenu ${isSubmenuActive(["/notifications", "/admin/account", "/settings"]) ? "active" : ""}`}>
 
               <button
                 type="button"
@@ -95,23 +100,15 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </button>
 
               {/* SUBMENU */}
-              <div className={`submenu collapse ${open ? "show" : ""}`}>
+              <div className={`submenu collapse ${open || pagesActive ? "show" : ""}`}>
                 <ul className="submenu-list list-unstyled">
                   <li className="submenu-item">
-                    <Link className="submenu-link" to="/notifications">
-                      Notifications
-                    </Link>
+                    <Link className={`submenu-link ${isActive("/admin/account")}`} to="/admin/account">Account</Link>
                   </li>
                   <li className="submenu-item">
-                    <Link className="submenu-link" to="/account">
-                      Account
-                    </Link>
+                    <Link className={`submenu-link ${isActive("/admin/setting")}`} to="/admin/setting">Setting</Link>
                   </li>
-                  <li className="submenu-item">
-                    <Link className="submenu-link" to="/settings">
-                      Settings
-                    </Link>
-                  </li>
+                  
                 </ul>
               </div>
 
