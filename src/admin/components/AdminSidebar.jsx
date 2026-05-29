@@ -1,8 +1,19 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { adminLogout } from "../../api/admin/auth";
 
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const location = useLocation();
+  const location = useLocation(); const navigate = useNavigate();
+  const handleLogout = async () => {
+    localStorage.removeItem("admin_token")
+    localStorage.removeItem("admin_user")
+    navigate("/admin/login")
+    try {
+      await adminLogout()
+    } catch (err) {
+      // already logout
+    }
+  }
   const [open, setOpen] = useState(false);
 
   const isActive = (path) =>
@@ -44,33 +55,39 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
             <li className="nav-item">
               <Link className={`nav-link ${isActive("/admin/dashboard")}`} to="/admin/dashboard">
-                <span className="nav-link-text">Dashboard</span>
+                <i className="fa-solid fa-gauge me-2"></i><span className="nav-link-text">Dashboard</span>
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/admin/orders")}`} to="/admin/orders">
-                <span className="nav-link-text">Orders</span>
+              <Link className={`nav-link ${isActive("/admin/account")}`} to="/admin/account">
+                <i className="fa-solid fa-cog me-2"></i><span className="nav-link-text">Account</span>
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/admin/products")}`} to="/admin/products">
-                <span className="nav-link-text">Products</span>
+              <Link className={`nav-link ${isActive("/admin/customers")}`} to="#">
+                <i className="fa-solid fa-users me-2"></i><span className="nav-link-text">Users</span>
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/admin/categories")}`} to="/admin/categories">
-                <span className="nav-link-text">Categories</span>
+              <Link className={`nav-link ${isActive("/admin/categories")}`} to="#">
+                <i className="fa-solid fa-layer-group me-2"></i><span className="nav-link-text">Categories</span>
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className={`nav-link ${isActive("/admin/customers")}`} to="/admin/customers">
-                <span className="nav-link-text">Customers</span>
+              <Link className={`nav-link ${isActive("/admin/products")}`} to="#">
+                <i className="fa-solid fa-box me-2"></i><span className="nav-link-text">Products</span>
               </Link>
             </li>
+
+            {/*<li className="nav-item">
+              <Link className={`nav-link ${isActive("/admin/orders")}`} to="#">
+                <i className="fa-solid fa-cart-shopping me-2"></i><span className="nav-link-text">Orders</span>
+              </Link>
+            </li>*/}
 
             {/*<li className="nav-item">
               <Link className={`nav-link ${isActive("/admin/account")}`} to="/admin/account">
@@ -79,23 +96,16 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>*/}
 
             {/* COLLAPSIBLE MENU FIXED */}
-            <li className={`nav-item has-submenu ${isSubmenuActive(["/notifications", "/admin/account", "/settings"]) ? "active" : ""}`}>
-
+            <li className={`nav-item has-submenu ${isSubmenuActive(["/notifications", "/admin/account", "/settings"]) ? "active" : ""} d-none`}>
               <button
                 type="button"
                 className="nav-link submenu-toggle w-100 text-start border-0 bg-transparent"
                 onClick={() => setOpen(!open)}
                 aria-expanded={open}
               >
-                <span className="nav-link-text">Pages</span>
-
+                <i className="fa-solid fa-file-lines me-2"></i><span className="nav-link-text">Pages</span>
                 <span className="submenu-arrow float-end">
-                  <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-                    />
-                  </svg>
+                  <i className={`fa-solid ${open ? "fa-chevron-up" : "fa-chevron-down"}`}></i>
                 </span>
               </button>
 
@@ -113,6 +123,14 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </div>
 
             </li>
+
+            <button
+              type="button"
+              className="nav-link border-0 bg-transparent w-100 text-start text-danger"
+              onClick={handleLogout}
+            >
+              <i className="fa-solid fa-right-from-bracket me-2"></i><span className="nav-link-text">Logout</span>
+            </button>
 
           </ul>
         </nav>
