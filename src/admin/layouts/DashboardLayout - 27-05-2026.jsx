@@ -1,16 +1,10 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import AdminHeader from "../components/AdminHeader"
 import AdminSidebar from "../components/AdminSidebar"
 import AdminFooter from "../components/AdminFooter"
 
 function DashboardLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const navigate = useNavigate()
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token")
-    if (!token) navigate("/admin/login")
-  }, [navigate])
 
   useEffect(() => {
     // Frontend CSS off, Admin CSS + FA on
@@ -29,11 +23,6 @@ function DashboardLayout({ children }) {
   return (
     <div className="app">
       <style>{`
-        html, body, #root { height: 100%; }
-
-        .app { min-height: 100vh; display: flex; flex-direction: column; }
-        .app-wrapper { flex: 1; }
-        
         @media (max-width: 1199px) {
           .app-sidepanel {
             transform: translateX(-100%); transition: all 0.3s ease;

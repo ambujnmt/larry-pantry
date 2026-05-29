@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { adminLogin, adminForgotPassword } from "../../api/admin/auth"
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap');
@@ -32,16 +31,7 @@ function AdminLogin() {
   const [loading, setLoading]   = useState(false)
   const [error, setError]       = useState("")
   const [sent, setSent]         = useState(false)
-
-  const [email, setEmail]           = useState("")
-  const [password, setPassword]     = useState("")
-  const [resetEmail, setResetEmail] = useState("")
-
   const navigate = useNavigate()
-  useEffect(() => {
-    const token = localStorage.getItem("admin_token")
-    if (token) navigate("/admin/dashboard")
-  }, [navigate])  // ← navigate add karo
 
   const switchMode = (m) => { setMode(m); setError(""); setSent(false) }
 
@@ -49,12 +39,11 @@ function AdminLogin() {
     e.preventDefault()
     setError(""); setLoading(true)
     try {
-      const data = await adminLogin(email, password)
-      localStorage.setItem("admin_token", data.data.token)
-      localStorage.setItem("admin_user", JSON.stringify(data.data.admin))
+      // TODO: apna login API call yahan lagayein
+      await new Promise(r => setTimeout(r, 1000))
       navigate("/admin/dashboard")
     } catch (err) {
-      setError(err.message || "Invalid credentials.")
+      setError(err?.message || "Invalid credentials. Please try again.")
     } finally { setLoading(false) }
   }
 
@@ -62,10 +51,11 @@ function AdminLogin() {
     e.preventDefault()
     setError(""); setLoading(true)
     try {
-      await adminForgotPassword(resetEmail)
+      // TODO: apna reset password API call yahan lagayein
+      await new Promise(r => setTimeout(r, 1000))
       setSent(true)
     } catch (err) {
-      setError(err.message || "Something went wrong.")
+      setError(err?.message || "Something went wrong. Please try again.")
     } finally { setLoading(false) }
   }
 
@@ -121,10 +111,7 @@ function AdminLogin() {
                       <div className="position-relative">
                         <span className="al-icon"><i className="fa fa-envelope" /></span>
                         <input id="al-email" type="email" className="form-control al-input"
-                          placeholder="admin@larrypantry.com"
-                          value={email}
-                          onChange={e => setEmail(e.target.value)}
-                          autoComplete="email" required />
+                          placeholder="admin@larrypantry.com" autoComplete="email" required />
                       </div>
                     </div>
 
@@ -133,9 +120,7 @@ function AdminLogin() {
                       <div className="position-relative">
                         <span className="al-icon"><i className="fa fa-lock" /></span>
                         <input id="al-pass" type={showPass ? "text" : "password"} className="form-control al-input"
-                          placeholder="Enter your password"
-                          value={password}
-                          onChange={e => setPassword(e.target.value)}
+                          placeholder="Enter your password" autoComplete="current-password"
                           style={{paddingRight:40}} required />
                         <button type="button" className="al-toggle" onClick={() => setShowPass(v => !v)}
                           aria-label={showPass ? "Hide password" : "Show password"}>
@@ -193,10 +178,7 @@ function AdminLogin() {
                         <div className="position-relative">
                           <span className="al-icon"><i className="fa fa-envelope" /></span>
                           <input id="al-reset-email" type="email" className="form-control al-input"
-                            placeholder="admin@larrypantry.com"
-                            value={resetEmail}
-                            onChange={e => setResetEmail(e.target.value)}
-                            autoComplete="email" required />
+                            placeholder="admin@larrypantry.com" autoComplete="email" required />
                         </div>
                       </div>
 

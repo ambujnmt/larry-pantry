@@ -12,6 +12,7 @@ import DashboardLayout from "./admin/layouts/DashboardLayout";
 import Dashboard from "./admin/pages/Dashboard";
 import Orders from "./admin/pages/Orders";
 import Account from "./admin/pages/Account";
+import AdminResetPassword from "./admin/pages/AdminResetPassword"
 /*------------------------*/
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         {/* Admin Routes - Header Footer NAHI */}
         <Route path="/admin"       element={<AuthLayout><AdminLogin /></AuthLayout>} />
         <Route path="/admin/login" element={<AuthLayout><AdminLogin /></AuthLayout>} />
+        <Route path="/admin/reset-password" element={<AuthLayout><AdminResetPassword /></AuthLayout>} />
         {/* ADMIN DASHBOARD PAGES */}
         <Route path="/admin/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>}/>
 
